@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Docker-Demo
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_docker
+    username: root
+    password: Prasanna@5030
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+    show-sql: true

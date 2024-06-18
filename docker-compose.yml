@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  docker-demo:
+    image: docker-demo:1.0
+    container_name: docker-demo
+    ports:
+     - 8080:8080
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/spring_docker?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: password
+    volumes:
+      - .m2:/root/.m2
+    restart: on-failure
+
+  mysqldb:
+    image: mysql
+    container_name: mysqldb
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: spring_docker
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysqldata:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysqldata:
